@@ -1,0 +1,254 @@
+/**
+ * Design Tokens - Generated from Genesis Collection Color Analysis
+ * 
+ * Color Palette Analysis Summary:
+ * - Primary colors: Deep blues and purples (#182257, #1c255f, #151e56)
+ * - Secondary colors: Vibrant teals, purples, and warm accents
+ * - Average brightness: 50-110 (medium to high)
+ * - Saturation: 60-75+ (highly saturated)
+ * - Color temperature: Cool (blue/purple dominant)
+ * - Vibrance: 60-70 (high energy)
+ */
+
+:root {
+  /* ========================================
+     PRIMARY COLOR PALETTE - Deep Blues/Purples
+     ======================================== */
+  --color-primary-900: #0e062f; /* Darkest - extracted from shadows */
+  --color-primary-800: #121645; /* Deep night blue */
+  --color-primary-700: #151e56; /* Primary dark blue */
+  --color-primary-600: #182257; /* Core primary */
+  --color-primary-500: #1c255f; /* Mid primary */
+  --color-primary-400: #20265c; /* Lighter primary */
+  --color-primary-300: #2c2775; /* Purple-blue blend */
+  --color-primary-200: #3e3b7b; /* Soft purple */
+  --color-primary-100: #54527d; /* Light purple-gray */
+
+  /* ========================================
+     SECONDARY COLOR PALETTE - Vibrant Accents
+     ======================================== */
+  --color-secondary-purple: #9545b8; /* Vibrant purple */
+  --color-secondary-magenta: #bd6d50; /* Warm magenta-orange */
+  --color-secondary-blue: #2e4c97; /* Bright blue */
+  --color-secondary-teal: #287698; /* Teal accent */
+  --color-secondary-cyan: #00ccf9; /* Bright cyan */
+  --color-secondary-green: #44b879; /* Emerald green */
+  --color-secondary-orange: #feab6f; /* Warm orange */
+  --color-secondary-yellow: #fefbb5; /* Bright yellow */
+
+  /* ========================================
+     BRIGHTNESS LEVELS (Based on avg_brightness analysis)
+     ======================================== */
+  --brightness-low: 0.55; /* 55% - Lower brightness range */
+  --brightness-mid: 0.75; /* 75% - Mid brightness range */
+  --brightness-high: 0.95; /* 95% - High brightness range */
+  --brightness-ultra: 1.1; /* 110% - Ultra bright accents */
+
+  /* ========================================
+     NEUTRAL GRAYS (Extracted from analysis)
+     ======================================== */
+  --color-neutral-950: #0a0627; /* Near black */
+  --color-neutral-900: #0e0530; /* Deep shadow */
+  --color-neutral-800: #0f082f; /* Dark gray-purple */
+  --color-neutral-700: #100c30; /* Dark neutral */
+  --color-neutral-600: #171445; /* Mid-dark */
+  --color-neutral-500: #333871; /* Mid gray-blue */
+  --color-neutral-400: #4c4575; /* Light gray-purple */
+  --color-neutral-300: #7f7bf6; /* Light purple-blue */
+  --color-neutral-200: #c3ffff; /* Soft cyan */
+  --color-neutral-100: #deffff; /* Near white cyan */
+  --color-neutral-50: #ffffff; /* Pure white */
+
+  /* ========================================
+     GRADIENTS (Based on gradient analysis)
+     ======================================== */
+  --gradient-primary: linear-gradient(
+    to bottom,
+    var(--color-primary-600),
+    var(--color-primary-900)
+  );
+  
+  --gradient-secondary: linear-gradient(
+    135deg,
+    var(--color-secondary-purple),
+    var(--color-secondary-blue)
+  );
+  
+  --gradient-vibrant: linear-gradient(
+    to right,
+    var(--color-secondary-cyan),
+    var(--color-secondary-purple),
+    var(--color-secondary-magenta)
+  );
+  
+  --gradient-subtle: linear-gradient(
+    to bottom,
+    var(--color-primary-500),
+    rgba(14, 6, 47, 0.8)
+  );
+  
+  --gradient-radial-cyan: radial-gradient(
+    ellipse at center,
+    rgba(0, 204, 249, 0.15) 0%,
+    transparent 70%
+  );
+  
+  --gradient-radial-purple: radial-gradient(
+    ellipse at center,
+    rgba(149, 69, 184, 0.15) 0%,
+    transparent 70%
+  );
+  
+  --gradient-radial-orange: radial-gradient(
+    ellipse at center,
+    rgba(254, 171, 111, 0.15) 0%,
+    transparent 70%
+  );
+  
+  --gradient-mesh: 
+    radial-gradient(ellipse at 20% 20%, rgba(0, 204, 249, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(149, 69, 184, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(40, 118, 152, 0.1) 0%, transparent 60%);
+  
+  --gradient-section-divider: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 204, 249, 0.5),
+    rgba(149, 69, 184, 0.5),
+    transparent
+  );
+  
+  --gradient-accent-strip: linear-gradient(
+    90deg,
+    var(--color-secondary-cyan) 0%,
+    var(--color-secondary-purple) 50%,
+    var(--color-secondary-orange) 100%
+  );
+
+  /* ========================================
+     SEMANTIC COLORS
+     ======================================== */
+  --color-background: var(--color-primary-900);
+  --color-surface: var(--color-primary-800);
+  --color-surface-elevated: var(--color-primary-700);
+  --color-text-primary: var(--color-neutral-100);
+  --color-text-secondary: var(--color-neutral-300);
+  --color-text-tertiary: var(--color-neutral-400);
+  --color-accent: var(--color-secondary-cyan);
+  --color-accent-warm: var(--color-secondary-orange);
+  --color-border: rgba(127, 123, 246, 0.2);
+  --color-border-bright: var(--color-secondary-cyan);
+
+  /* ========================================
+     SATURATION & VIBRANCE (From color analysis)
+     ======================================== */
+  --saturation-low: 40%;
+  --saturation-mid: 60%;
+  --saturation-high: 70%;
+  --saturation-ultra: 80%;
+  
+  --vibrance-multiplier: 1.15; /* Boost for high-energy elements */
+
+  /* ========================================
+     SHADOWS & GLOWS (Based on shadow_percentage analysis)
+     ======================================== */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6),
+               0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7),
+               0 4px 6px -2px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.8),
+               0 10px 10px -5px rgba(0, 0, 0, 0.6);
+  
+  /* Neon glows for high vibrance elements */
+  --glow-cyan: 0 0 10px rgba(0, 204, 249, 0.5),
+               0 0 20px rgba(0, 204, 249, 0.3),
+               0 0 30px rgba(0, 204, 249, 0.1);
+  --glow-purple: 0 0 10px rgba(149, 69, 184, 0.5),
+                 0 0 20px rgba(149, 69, 184, 0.3),
+                 0 0 30px rgba(149, 69, 184, 0.1);
+  --glow-orange: 0 0 10px rgba(254, 171, 111, 0.5),
+                 0 0 20px rgba(254, 171, 111, 0.3);
+
+  /* ========================================
+     SPACING SCALE
+     ======================================== */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-8: 3rem;     /* 48px */
+  --space-10: 4rem;    /* 64px */
+  --space-12: 6rem;    /* 96px */
+  --space-16: 8rem;    /* 128px */
+
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+  --font-family-base: 'Satoshi-Variable', 'Satoshi-Regular', system-ui, -apple-system, sans-serif;
+  --font-family-display: 'Satoshi-Black', 'Satoshi-Bold', system-ui, -apple-system, sans-serif;
+  
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  --font-size-6xl: 3.75rem;   /* 60px */
+  --font-size-7xl: 4.5rem;    /* 72px */
+  
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;  /* Fully rounded */
+
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slower: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========================================
+     Z-INDEX SCALE
+     ======================================== */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-fixed: 1200;
+  --z-overlay: 1300;
+  --z-modal: 1400;
+  --z-tooltip: 1500;
+}
+
+/* ========================================
+   DARK MODE ADJUSTMENTS (Optional)
+   ======================================== */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* If you want to support light mode, adjust tokens here */
+    /* Based on analysis, the Genesis aesthetic is inherently dark,
+       so light mode might reduce the impact */
+  }
+}

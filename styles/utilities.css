@@ -1,0 +1,287 @@
+/**
+ * Utility Classes - Based on Genesis Color Analysis
+ * High saturation, vibrant, cool-toned utilities
+ */
+
+/* ========================================
+   COLOR UTILITIES
+   ======================================== */
+
+/* Text Colors */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+.text-accent { color: var(--color-accent); }
+.text-accent-warm { color: var(--color-accent-warm); }
+
+/* Vibrant Text Colors */
+.text-cyan { color: var(--color-secondary-cyan); }
+.text-purple { color: var(--color-secondary-purple); }
+.text-teal { color: var(--color-secondary-teal); }
+.text-green { color: var(--color-secondary-green); }
+.text-orange { color: var(--color-secondary-orange); }
+.text-yellow { color: var(--color-secondary-yellow); }
+
+/* Background Colors */
+.bg-primary { background-color: var(--color-background); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-elevated { background-color: var(--color-surface-elevated); }
+.bg-transparent { background-color: transparent; }
+
+/* Vibrant Backgrounds */
+.bg-cyan { background-color: var(--color-secondary-cyan); }
+.bg-purple { background-color: var(--color-secondary-purple); }
+.bg-teal { background-color: var(--color-secondary-teal); }
+.bg-orange { background-color: var(--color-secondary-orange); }
+
+/* Gradient Backgrounds */
+.bg-gradient-primary { background: var(--gradient-primary); }
+.bg-gradient-secondary { background: var(--gradient-secondary); }
+.bg-gradient-vibrant { background: var(--gradient-vibrant); }
+.bg-gradient-subtle { background: var(--gradient-subtle); }
+.bg-gradient-mesh { background: var(--gradient-mesh); }
+.bg-gradient-radial-cyan { background: var(--gradient-radial-cyan); }
+.bg-gradient-radial-purple { background: var(--gradient-radial-purple); }
+.bg-gradient-radial-orange { background: var(--gradient-radial-orange); }
+
+/* Panel Gradient Overlays */
+.panel-gradient-cyan {
+  background: linear-gradient(135deg, rgba(0, 204, 249, 0.05) 0%, transparent 50%);
+}
+
+.panel-gradient-purple {
+  background: linear-gradient(135deg, transparent 50%, rgba(149, 69, 184, 0.05) 100%);
+}
+
+.panel-gradient-orange {
+  background: linear-gradient(180deg, transparent 0%, rgba(254, 171, 111, 0.05) 100%);
+}
+
+/* Section Dividers */
+.section-divider {
+  height: 1px;
+  background: var(--gradient-section-divider);
+}
+
+.accent-strip {
+  height: 4px;
+  background: var(--gradient-accent-strip);
+}
+
+/* ========================================
+   GLOW EFFECTS (High Vibrance Elements)
+   ======================================== */
+.glow-cyan {
+  box-shadow: var(--glow-cyan);
+  transition: box-shadow var(--transition-base);
+}
+
+.glow-cyan:hover {
+  box-shadow: 0 0 15px rgba(0, 204, 249, 0.7),
+              0 0 30px rgba(0, 204, 249, 0.5),
+              0 0 45px rgba(0, 204, 249, 0.3);
+}
+
+.glow-purple {
+  box-shadow: var(--glow-purple);
+  transition: box-shadow var(--transition-base);
+}
+
+.glow-purple:hover {
+  box-shadow: 0 0 15px rgba(149, 69, 184, 0.7),
+              0 0 30px rgba(149, 69, 184, 0.5),
+              0 0 45px rgba(149, 69, 184, 0.3);
+}
+
+.glow-orange {
+  box-shadow: var(--glow-orange);
+  transition: box-shadow var(--transition-base);
+}
+
+.glow-orange:hover {
+  box-shadow: 0 0 15px rgba(254, 171, 111, 0.7),
+              0 0 30px rgba(254, 171, 111, 0.5);
+}
+
+/* Text glow effects */
+.text-glow-cyan {
+  color: var(--color-secondary-cyan);
+  text-shadow: 0 0 10px rgba(0, 204, 249, 0.8),
+               0 0 20px rgba(0, 204, 249, 0.4);
+}
+
+.text-glow-purple {
+  color: var(--color-secondary-purple);
+  text-shadow: 0 0 10px rgba(149, 69, 184, 0.8),
+               0 0 20px rgba(149, 69, 184, 0.4);
+}
+
+/* ========================================
+   SATURATION UTILITIES
+   ======================================== */
+.saturate-low { filter: saturate(var(--saturation-low)); }
+.saturate-mid { filter: saturate(var(--saturation-mid)); }
+.saturate-high { filter: saturate(var(--saturation-high)); }
+.saturate-ultra { filter: saturate(var(--saturation-ultra)); }
+
+/* ========================================
+   BRIGHTNESS UTILITIES
+   ======================================== */
+.brightness-low { filter: brightness(var(--brightness-low)); }
+.brightness-mid { filter: brightness(var(--brightness-mid)); }
+.brightness-high { filter: brightness(var(--brightness-high)); }
+.brightness-ultra { filter: brightness(var(--brightness-ultra)); }
+
+/* ========================================
+   BORDER UTILITIES
+   ======================================== */
+.border { border: 1px solid var(--color-border); }
+.border-bright { border: 1px solid var(--color-border-bright); }
+.border-cyan { border: 1px solid var(--color-secondary-cyan); }
+.border-purple { border: 1px solid var(--color-secondary-purple); }
+
+.border-2 { border-width: 2px; }
+.border-4 { border-width: 4px; }
+
+/* Animated borders */
+.border-animated {
+  position: relative;
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    var(--gradient-vibrant) border-box;
+  animation: border-flow 3s linear infinite;
+}
+
+@keyframes border-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ========================================
+   SHADOW UTILITIES
+   ======================================== */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+.shadow-none { box-shadow: none; }
+
+/* ========================================
+   TYPOGRAPHY UTILITIES
+   ======================================== */
+.font-light { font-weight: var(--font-weight-light); }
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-bold { font-weight: var(--font-weight-bold); }
+.font-black { font-weight: var(--font-weight-black); }
+
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+.text-4xl { font-size: var(--font-size-4xl); }
+.text-5xl { font-size: var(--font-size-5xl); }
+.text-6xl { font-size: var(--font-size-6xl); }
+.text-7xl { font-size: var(--font-size-7xl); }
+
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+
+/* ========================================
+   SPACING UTILITIES
+   ======================================== */
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+.p-6 { padding: var(--space-6); }
+.p-8 { padding: var(--space-8); }
+.p-10 { padding: var(--space-10); }
+
+.m-1 { margin: var(--space-1); }
+.m-2 { margin: var(--space-2); }
+.m-3 { margin: var(--space-3); }
+.m-4 { margin: var(--space-4); }
+.m-5 { margin: var(--space-5); }
+.m-6 { margin: var(--space-6); }
+.m-8 { margin: var(--space-8); }
+.m-10 { margin: var(--space-10); }
+
+/* ========================================
+   BORDER RADIUS UTILITIES
+   ======================================== */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-2xl { border-radius: var(--radius-2xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* ========================================
+   OPACITY UTILITIES
+   ======================================== */
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+/* ========================================
+   BACKDROP EFFECTS
+   ======================================== */
+.backdrop-blur-sm { backdrop-filter: blur(4px); }
+.backdrop-blur-md { backdrop-filter: blur(8px); }
+.backdrop-blur-lg { backdrop-filter: blur(16px); }
+
+/* ========================================
+   TRANSITION UTILITIES
+   ======================================== */
+.transition-fast { transition: all var(--transition-fast); }
+.transition { transition: all var(--transition-base); }
+.transition-slow { transition: all var(--transition-slow); }
+.transition-slower { transition: all var(--transition-slower); }
+
+/* ========================================
+   HOVER EFFECTS (High Vibrance)
+   ======================================== */
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-glow:hover {
+  filter: brightness(1.2) saturate(1.3);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* ========================================
+   GLASSMORPHISM EFFECTS
+   ======================================== */
+.glass {
+  background: rgba(14, 6, 47, 0.6);
+  backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(127, 123, 246, 0.2);
+}
+
+.glass-vibrant {
+  background: rgba(28, 37, 95, 0.4);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(0, 204, 249, 0.3);
+}

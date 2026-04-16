@@ -1,0 +1,36 @@
+# Python 3.11 — unpinned; pin in lockfiles or CI if you need reproducible builds.
+bip-utils
+boto3
+chromadb
+cryptography
+# Optional runtime extra used by llama_runtime bootstrap flow.
+diskcache
+discord.py
+fastapi
+google-api-python-client
+google-auth
+# Optional Google API transport adapter (transitive for some auth flows).
+google-auth-httplib2
+google-auth-oauthlib
+httpx
+huggingface-hub
+keyring
+litellm
+# Browser automation runtime (run: playwright install chromium)
+playwright
+llama-cpp-python @ git+https://github.com/JamePeng/llama-cpp-python.git
+# Optional image backend used by local model toolchain.
+Pillow
+psutil
+pydantic
+PySide6
+qasync
+requests
+sqlcipher3
+uvicorn
+livekit>=0.17
+# Reserved for LiveKit Agents integrations (no direct import in current app code).
+livekit-agents>=0.12
+livekit-plugins-silero>=0.7
+faster-whisper>=1.1
+piper-tts>=1.2

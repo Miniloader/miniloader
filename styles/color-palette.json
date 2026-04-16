@@ -1,0 +1,325 @@
+{
+  "name": "Genesis Color Palette",
+  "description": "Generated from Genesis collection color analysis - high saturation, cool-toned, futuristic palette",
+  "metadata": {
+    "source": "Genesis & Genesis Mini building images",
+    "images_analyzed": 152,
+    "average_saturation": "60-75%",
+    "average_vibrance": "60-70",
+    "average_brightness": "50-110",
+    "color_temperature": "cool",
+    "dominant_hues": "160-260 (blue/purple)",
+    "is_monochromatic": false,
+    "color_diversity": "medium-high"
+  },
+  "colors": {
+    "primary": {
+      "900": {
+        "hex": "#0e062f",
+        "rgb": "14, 6, 47",
+        "hsl": "244, 77%, 10%",
+        "usage": "Darkest backgrounds, deep shadows"
+      },
+      "800": {
+        "hex": "#121645",
+        "rgb": "18, 22, 69",
+        "hsl": "235, 59%, 17%",
+        "usage": "Main background, surface"
+      },
+      "700": {
+        "hex": "#151e56",
+        "rgb": "21, 30, 86",
+        "hsl": "232, 61%, 21%",
+        "usage": "Elevated surfaces, cards"
+      },
+      "600": {
+        "hex": "#182257",
+        "rgb": "24, 34, 87",
+        "hsl": "230, 57%, 22%",
+        "usage": "Primary brand color"
+      },
+      "500": {
+        "hex": "#1c255f",
+        "rgb": "28, 37, 95",
+        "hsl": "232, 54%, 24%",
+        "usage": "Interactive elements"
+      },
+      "400": {
+        "hex": "#20265c",
+        "rgb": "32, 38, 92",
+        "hsl": "234, 48%, 24%",
+        "usage": "Hover states"
+      },
+      "300": {
+        "hex": "#2c2775",
+        "rgb": "44, 39, 117",
+        "hsl": "244, 50%, 31%",
+        "usage": "Active states"
+      },
+      "200": {
+        "hex": "#3e3b7b",
+        "rgb": "62, 59, 123",
+        "hsl": "243, 35%, 36%",
+        "usage": "Borders, dividers"
+      },
+      "100": {
+        "hex": "#54527d",
+        "rgb": "84, 82, 125",
+        "hsl": "243, 21%, 41%",
+        "usage": "Subtle accents"
+      }
+    },
+    "secondary": {
+      "cyan": {
+        "hex": "#00ccf9",
+        "rgb": "0, 204, 249",
+        "hsl": "191, 100%, 49%",
+        "usage": "Primary actions, links, emphasis"
+      },
+      "purple": {
+        "hex": "#9545b8",
+        "rgb": "149, 69, 184",
+        "hsl": "282, 45%, 50%",
+        "usage": "Secondary actions, highlights"
+      },
+      "magenta": {
+        "hex": "#bd6d50",
+        "rgb": "189, 109, 80",
+        "hsl": "16, 45%, 53%",
+        "usage": "Warm accent, contrast"
+      },
+      "blue": {
+        "hex": "#2e4c97",
+        "rgb": "46, 76, 151",
+        "hsl": "223, 53%, 39%",
+        "usage": "Information, stability"
+      },
+      "teal": {
+        "hex": "#287698",
+        "rgb": "40, 118, 152",
+        "hsl": "198, 58%, 38%",
+        "usage": "Success, growth"
+      },
+      "green": {
+        "hex": "#44b879",
+        "rgb": "68, 184, 121",
+        "hsl": "147, 46%, 49%",
+        "usage": "Success, positive"
+      },
+      "orange": {
+        "hex": "#feab6f",
+        "rgb": "254, 171, 111",
+        "hsl": "25, 99%, 72%",
+        "usage": "Warning, energy"
+      },
+      "yellow": {
+        "hex": "#fefbb5",
+        "rgb": "254, 251, 181",
+        "hsl": "58, 97%, 85%",
+        "usage": "Caution, highlight"
+      }
+    },
+    "neutral": {
+      "950": {
+        "hex": "#0a0627",
+        "rgb": "10, 6, 39",
+        "hsl": "247, 73%, 9%",
+        "usage": "Near black"
+      },
+      "900": {
+        "hex": "#0e0530",
+        "rgb": "14, 5, 48",
+        "hsl": "253, 81%, 10%",
+        "usage": "Deep shadow"
+      },
+      "800": {
+        "hex": "#0f082f",
+        "rgb": "15, 8, 47",
+        "hsl": "251, 71%, 11%",
+        "usage": "Dark neutral"
+      },
+      "700": {
+        "hex": "#100c30",
+        "rgb": "16, 12, 48",
+        "hsl": "247, 60%, 12%",
+        "usage": "Dark gray"
+      },
+      "600": {
+        "hex": "#171445",
+        "rgb": "23, 20, 69",
+        "hsl": "244, 55%, 17%",
+        "usage": "Mid-dark"
+      },
+      "500": {
+        "hex": "#333871",
+        "rgb": "51, 56, 113",
+        "hsl": "235, 38%, 32%",
+        "usage": "Mid gray"
+      },
+      "400": {
+        "hex": "#4c4575",
+        "rgb": "76, 69, 117",
+        "hsl": "249, 26%, 36%",
+        "usage": "Light gray"
+      },
+      "300": {
+        "hex": "#7f7bf6",
+        "rgb": "127, 123, 246",
+        "hsl": "242, 87%, 72%",
+        "usage": "Light accent"
+      },
+      "200": {
+        "hex": "#c3ffff",
+        "rgb": "195, 255, 255",
+        "hsl": "180, 100%, 88%",
+        "usage": "Soft cyan"
+      },
+      "100": {
+        "hex": "#deffff",
+        "rgb": "222, 255, 255",
+        "hsl": "180, 100%, 94%",
+        "usage": "Near white"
+      },
+      "50": {
+        "hex": "#ffffff",
+        "rgb": "255, 255, 255",
+        "hsl": "0, 0%, 100%",
+        "usage": "Pure white"
+      }
+    }
+  },
+  "gradients": {
+    "primary": {
+      "type": "linear",
+      "direction": "to bottom",
+      "stops": [
+        { "color": "#182257", "position": "0%" },
+        { "color": "#0e062f", "position": "100%" }
+      ],
+      "css": "linear-gradient(to bottom, #182257, #0e062f)",
+      "usage": "Main backgrounds, hero sections"
+    },
+    "secondary": {
+      "type": "linear",
+      "direction": "135deg",
+      "stops": [
+        { "color": "#9545b8", "position": "0%" },
+        { "color": "#2e4c97", "position": "100%" }
+      ],
+      "css": "linear-gradient(135deg, #9545b8, #2e4c97)",
+      "usage": "Buttons, cards, emphasis"
+    },
+    "vibrant": {
+      "type": "linear",
+      "direction": "to right",
+      "stops": [
+        { "color": "#00ccf9", "position": "0%" },
+        { "color": "#9545b8", "position": "50%" },
+        { "color": "#bd6d50", "position": "100%" }
+      ],
+      "css": "linear-gradient(to right, #00ccf9, #9545b8, #bd6d50)",
+      "usage": "High-energy elements, borders, text"
+    },
+    "subtle": {
+      "type": "linear",
+      "direction": "to bottom",
+      "stops": [
+        { "color": "#1c255f", "position": "0%" },
+        { "color": "rgba(14, 6, 47, 0.8)", "position": "100%" }
+      ],
+      "css": "linear-gradient(to bottom, #1c255f, rgba(14, 6, 47, 0.8))",
+      "usage": "Subtle overlays, glass effects"
+    }
+  },
+  "effects": {
+    "shadows": {
+      "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.5)",
+      "md": "0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -1px rgba(0, 0, 0, 0.4)",
+      "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -2px rgba(0, 0, 0, 0.5)",
+      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 10px 10px -5px rgba(0, 0, 0, 0.6)"
+    },
+    "glows": {
+      "cyan": "0 0 10px rgba(0, 204, 249, 0.5), 0 0 20px rgba(0, 204, 249, 0.3), 0 0 30px rgba(0, 204, 249, 0.1)",
+      "purple": "0 0 10px rgba(149, 69, 184, 0.5), 0 0 20px rgba(149, 69, 184, 0.3), 0 0 30px rgba(149, 69, 184, 0.1)",
+      "orange": "0 0 10px rgba(254, 171, 111, 0.5), 0 0 20px rgba(254, 171, 111, 0.3)"
+    },
+    "textGlows": {
+      "cyan": "0 0 10px rgba(0, 204, 249, 0.8), 0 0 20px rgba(0, 204, 249, 0.4)",
+      "purple": "0 0 10px rgba(149, 69, 184, 0.8), 0 0 20px rgba(149, 69, 184, 0.4)"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "base": "Satoshi-Variable, Satoshi-Regular, system-ui, -apple-system, sans-serif",
+      "display": "Satoshi-Black, Satoshi-Bold, system-ui, -apple-system, sans-serif"
+    },
+    "fontSize": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem",
+      "7xl": "4.5rem"
+    },
+    "fontWeight": {
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "bold": 700,
+      "black": 900
+    },
+    "lineHeight": {
+      "tight": 1.2,
+      "normal": 1.5,
+      "relaxed": 1.75
+    }
+  },
+  "spacing": {
+    "1": "0.25rem",
+    "2": "0.5rem",
+    "3": "0.75rem",
+    "4": "1rem",
+    "5": "1.5rem",
+    "6": "2rem",
+    "8": "3rem",
+    "10": "4rem",
+    "12": "6rem",
+    "16": "8rem"
+  },
+  "borderRadius": {
+    "sm": "0.25rem",
+    "md": "0.5rem",
+    "lg": "0.75rem",
+    "xl": "1rem",
+    "2xl": "1.5rem",
+    "full": "9999px"
+  },
+  "designPrinciples": [
+    "High saturation for energy and vibrancy",
+    "Cool color temperature for futuristic feel",
+    "Neon accents for emphasis and calls-to-action",
+    "Deep shadows for depth and contrast",
+    "Glassmorphism for modern UI elements",
+    "Gradient overlays for visual interest",
+    "Glow effects for high-energy elements"
+  ],
+  "accessibilityNotes": {
+    "contrastRatios": {
+      "primaryOnBackground": "High contrast (>7:1)",
+      "cyanOnDark": "AAA compliant",
+      "purpleOnDark": "AA compliant",
+      "yellowOnDark": "AAA compliant"
+    },
+    "recommendations": [
+      "Use cyan (#00ccf9) for primary actions - highest contrast",
+      "Avoid purple text on dark backgrounds for body text",
+      "Yellow works well for warnings and highlights",
+      "Ensure text glows don't reduce legibility"
+    ]
+  }
+}

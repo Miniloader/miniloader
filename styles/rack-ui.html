@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Miniloader — Rack UI Style Reference</title>
+<style>
+/* ============================================================
+   RACK UI — HTML/CSS STYLE REFERENCE
+   Faithful recreation of the Miniloader PyQt rack aesthetic.
+
+   All colors, dimensions, fonts, and gradients are sourced
+   directly from rack_items.py, hypervisor_panel.py, and
+   fan_item.py.
+
+   Font stack: Consolas (monospace) — same as the PyQt app.
+   All sizing uses px to match 1:1 with the Qt scene.
+   ============================================================ */
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --font-mono: "Consolas", "Courier New", monospace;
+
+  /* Panel backgrounds */
+  --panel-bg-top:    #2a2d34;
+  --panel-bg-mid:    #1e2028;
+  --panel-bg-bot:    #191b20;
+  --panel-outline:   #5c636e;
+
+  /* Module card */
+  --card-bg-top:     #252830;
+  --card-bg-bot:     #1c1e24;
+  --card-outline:    #5c636e;
+
+  /* LCD bezel */
+  --lcd-bg-top:      #0a100a;
+  --lcd-bg-mid1:     #0d150d;
+  --lcd-bg-mid2:     #0a120a;
+  --lcd-bg-bot:      #070c07;
+  --lcd-outline:     #2a3a2a;
+
+  /* Primary green (hypervisor CRT) */
+  --green-bright:    #30e848;
+  --green-mid:       #30b848;
+  --green-dim:       #1a2a1a;
+
+  /* Status colours */
+  --status-ready:    #39d353;
+  --status-running:  #d68c1a;
+  --status-loading:  #d6b745;
+  --status-error:    #e24c4c;
+  --status-stopped:  #6f6f6f;
+
+  /* Port / signal colours */
+  --sig-local-ip:    #43b4e5;
+  --sig-brain:       #d93232;
+  --sig-mcp:         #e08b3a;
+  --sig-web:         #5a66c8;
+  --sig-db:          #2d93a2;
+  --sig-files:       #d4932c;
+  --sig-context:     #80c65f;
+  --sig-query:       #d1c748;
+  --sig-chat:        #4e8fe8;
+  --sig-server-cfg:  #8a57e8;
+  --sig-tool-schema: #e08b3a;
+  --sig-tool-exec:   #d46535;
+  --sig-db-query:    #2d93a2;
+  --sig-db-tx:       #206f7b;
+  --sig-db-resp:     #3ea874;
+  --sig-rtc:         #d17fb5;
+  --sig-routing:     #5a66c8;
+  --sig-tunnel:      #838383;
+  --sig-model-load:  #f3a95f;
+  --sig-sys-state:   #66c6ff;
+  --sig-port-err:    #c94848;
+
+  /* Log colours */
+  --log-green:       #30c040;
+  --log-amber:       #d4a020;
+  --log-red:         #e04040;
+  --log-cyan:        #40c8e0;
+  --log-dim:         #607060;
+
+  /* Screw / hardware chrome */
+  --screw-body:      #3a3d42;
+  --screw-slot:      #22242a;
+  --screw-pen:       #2a2d32;
+
+  /* Button chrome */
+  --btn-bg:          #2a2e36;
+  --btn-outline:     #626a77;
+  --btn-text:        #d3d8df;
+
+  /* Stat / field labels */
+  --label-dim:       #808890;
+  --label-sys:       #8ea58e;
+  --value-green:     #b6d9b6;
+
+  /* LED bar off segment */
+  --led-off:         #1a1d1a;
+
+  /* Power button */
+  --pwr-on-fill:     #0a1a0a;
+  --pwr-on-ring:     #30e848;
+  --pwr-off-fill:    #1a0808;
+  --pwr-off-ring:    #cc1111;
+  --pwr-off-icon:    #ff3333;
+
+  /* Tab buttons */
+  --tab-active-fill: #11151b;
+  --tab-active-text: #30b848;
+  --tab-idle-fill:   #0c0f14;
+  --tab-idle-text:   #7a818a;
+
+  /* Rack page background */
+  --page-bg:         #121316;
+}
+
+/* ── Page shell ─────────────────────────────────────────────── */
+body {
+  background: var(--page-bg);
+  color: var(--btn-text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 24px;
+  min-width: 900px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.section-header {
+  color: #4a5568;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin: 28px 0 10px;
+}
+
+/* ── Hypervisor panel ───────────────────────────────────────── */
+.hypervisor-panel {
+  background: linear-gradient(to bottom, #2a2d34 0%, #1e2028 15%, #191b20 100%);
+  border: 1.5px solid var(--panel-outline);
+  border-radius: 6px;
+  padding: 12px 16px 14px;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Panel title LCD bezel */
+.lcd-bezel {
+  background: linear-gradient(
+    to bottom,
+    #0a100a 0%,
+    #0d150d 15%,
+    #0a120a 85%,
+    #070c07 100%
+  );
+  border: 1px solid var(--lcd-outline);
+  border-radius: 4px;
+  padding: 8px 16px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 220px;
+}
+
+.hypervisor-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--green-bright);
+  letter-spacing: 1px;
+  text-shadow: 0 0 16px #30e848, 0 0 6px #30e848;
+}
+
+/* Stats row */
+.stats-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 8px;
+  color: var(--label-dim);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.stat-value-bezel {
+  background: #0a0f0a;
+  border: 0.8px solid var(--lcd-outline);
+  border-radius: 2px;
+  padding: 2px 8px;
+  min-width: 60px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 11px;
+  color: var(--green-mid);
+  font-weight: 700;
+}
+
+/* Power button */
+.power-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: filter 0.15s;
+  flex-shrink: 0;
+}
+
+.power-btn.on {
+  background: var(--pwr-on-fill);
+  border: 1.8px solid var(--pwr-on-ring);
+  box-shadow: 0 0 16px #30e84866, 0 0 6px #30e84840;
+}
+
+.power-btn.on svg { filter: drop-shadow(0 0 10px #30e848); }
+
+.power-btn.off {
+  background: var(--pwr-off-fill);
+  border: 1.8px solid var(--pwr-off-ring);
+  box-shadow: 0 0 16px #ff202066, 0 0 6px #ff202040;
+}
+
+.power-btn.off svg { filter: drop-shadow(0 0 10px #ff3333); }
+
+.power-btn:hover { filter: brightness(1.3); }
+
+/* Control buttons (INIT / AUTO) */
+.ctrl-btn {
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: border-color 0.12s, background 0.12s;
+  border: 1px solid;
+}
+
+.ctrl-btn.init {
+  background: #0c1218;
+  border-color: #2a4060;
+  color: #6090c0;
+}
+.ctrl-btn.init:hover { border-color: #4080c0; }
+
+.ctrl-btn.auto-on {
+  background: #1a2e1a;
+  border-color: var(--status-ready);
+  color: var(--value-green);
+}
+.ctrl-btn.auto-on:hover { border-color: #5be06f; }
+
+.ctrl-btn.auto-off {
+  background: #2e2a1a;
+  border-color: #e8a838;
+  color: #e8c878;
+}
+.ctrl-btn.auto-off:hover { border-color: #f0b448; }
+
+/* Module status LEDs */
+.module-leds {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.led-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 0.6px solid #1a1a1a;
+}
+
+.led.ready   { background: var(--status-ready); }
+.led.running { background: var(--status-running); }
+.led.loading { background: var(--status-loading); }
+.led.error   { background: var(--status-error); }
+.led.stopped { background: var(--status-stopped); }
+
+.led-abbrev {
+  font-size: 6px;
+  color: #606870;
+  letter-spacing: 0.3px;
+}
+
+/* Ventilation slots (decorative) */
+.vent-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vent-slot {
+  width: 20px;
+  height: 2px;
+  background: #0e1014;
+  border-radius: 1px;
+}
+
+/* ── Log / CRT screen ───────────────────────────────────────── */
+.log-screen {
+  background: #0a100a;
+  border: 1px solid var(--lcd-outline);
+  border-radius: 3px;
+  padding: 6px 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.6;
+  min-height: 110px;
+  overflow: hidden;
+}
+
+.log-bezel {
+  background: #161a16;
+  border: 1px solid var(--lcd-outline);
+  border-radius: 4px;
+  padding: 2px;
+  margin-top: 10px;
+}
+
+.log-line { color: var(--log-dim); }
+.log-line.info   { color: var(--log-green); }
+.log-line.warn   { color: var(--log-amber); }
+.log-line.error  { color: var(--log-red); }
+.log-line.worker { color: var(--log-cyan); }
+
+/* ── System monitor tab ─────────────────────────────────────── */
+.sys-monitor {
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.sys-section-label {
+  color: var(--label-sys);
+  font-size: 8px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.sys-row {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.sys-field {
+  color: var(--label-dim);
+  min-width: 72px;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sys-val {
+  color: var(--value-green);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.sys-val.cpu   { color: var(--green-mid); }
+.sys-val.ram   { color: var(--green-mid); }
+.sys-val.warn  { color: var(--status-running); }
+.sys-val.gpu   { color: #a0a6ad; }
+
+/* LED bar (CPU / RAM utilisation) */
+.led-bar {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.led-seg {
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  background: var(--led-off);
+  border: 0.6px solid #0e120e;
+}
+
+.led-seg.on-low  { background: var(--log-green); }
+.led-seg.on-mid  { background: var(--log-amber); }
+.led-seg.on-high { background: var(--log-red); }
+
+/* RAM limit slider */
+.ram-slider-track {
+  width: 120px;
+  height: 8px;
+  background: #0e120e;
+  border: 0.6px solid var(--lcd-outline);
+  border-radius: 4px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ram-slider-thumb {
+  position: absolute;
+  top: -2px;
+  width: 10px;
+  height: 12px;
+  background: var(--green-mid);
+  border: 0.8px solid var(--green-dim);
+  border-radius: 2px;
+}
+
+/* Backend LEDs */
+.backend-led {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.backend-led.cuda-on    { background: var(--status-ready); }
+.backend-led.cuda-off   { background: var(--led-off); }
+.backend-led.vulkan-on  { background: var(--sig-chat); }
+.backend-led.vulkan-off { background: var(--led-off); }
+
+/* ── Tab buttons (LOG / SYSTEM / PROC) ──────────────────────── */
+.panel-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.panel-tab {
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 700;
+  border-radius: 2px;
+  cursor: pointer;
+  letter-spacing: 0.6px;
+  border: 1px solid;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.panel-tab.active {
+  background: var(--tab-active-fill);
+  border-color: var(--lcd-outline);
+  color: var(--tab-active-text);
+}
+
+.panel-tab.idle {
+  background: var(--tab-idle-fill);
+  border-color: var(--screw-pen);
+  color: var(--tab-idle-text);
+}
+
+.panel-tab:hover { filter: brightness(1.25); }
+
+/* ── Kill button (process list) ─────────────────────────────── */
+.kill-btn {
+  background: #2a1515;
+  border: 0.8px solid #6a2020;
+  border-radius: 2px;
+  color: var(--log-red);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  width: 14px;
+  height: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ── Module card ─────────────────────────────────────────────── */
+.module-card {
+  background: linear-gradient(to bottom, #252830 0%, #1c1e24 100%);
+  border: 1.5px solid var(--card-outline);
+  border-radius: 6px;
+  padding: 12px 14px 10px;
+  position: relative;
+  width: 220px;
+  min-height: 120px;
+}
+
+/* Screws in corners of module card */
+.screw {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--screw-body);
+  border: 0.8px solid var(--screw-pen);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screw::after {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 1.2px;
+  background: var(--screw-slot);
+  border-radius: 0.5px;
+}
+
+.screw.tl { top: 6px;  left: 6px;  }
+.screw.tr { top: 6px;  right: 6px; }
+.screw.bl { bottom: 6px; left: 6px;  }
+.screw.br { bottom: 6px; right: 6px; }
+
+/* Module card title */
+.card-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--btn-text);
+  letter-spacing: 0.3px;
+  padding: 0 14px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Module card action button */
+.card-btn {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-outline);
+  border-radius: 3px;
+  color: var(--btn-text);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: background 0.1s;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.card-btn:hover { background: #363c48; }
+
+/* ── Port jacks ──────────────────────────────────────────────── */
+.port-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.port-jack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.jack-ring {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1c1c1c;
+  border: 2px solid;
+}
+
+.jack-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--label-dim);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* Individual port colours (matching JACK_COLORS / PORT_NAME_COLORS) */
+.port-local-ip    { border-color: var(--sig-local-ip); }
+.port-brain       { border-color: var(--sig-brain); }
+.port-mcp         { border-color: var(--sig-mcp); }
+.port-web         { border-color: var(--sig-web); }
+.port-db          { border-color: var(--sig-db); }
+.port-files       { border-color: var(--sig-files); }
+.port-context     { border-color: var(--sig-context); }
+.port-query       { border-color: var(--sig-query); }
+.port-chat        { border-color: var(--sig-chat); }
+.port-server-cfg  { border-color: var(--sig-server-cfg); }
+.port-tool-schema { border-color: var(--sig-tool-schema); }
+.port-tool-exec   { border-color: var(--sig-tool-exec); }
+.port-db-query    { border-color: var(--sig-db-query); }
+.port-db-tx       { border-color: var(--sig-db-tx); }
+.port-db-resp     { border-color: var(--sig-db-resp); }
+.port-rtc         { border-color: var(--sig-rtc); }
+.port-routing     { border-color: var(--sig-routing); }
+.port-tunnel      { border-color: var(--sig-tunnel); }
+.port-model-load  { border-color: var(--sig-model-load); }
+.port-sys-state   { border-color: var(--sig-sys-state); }
+.port-port-err    { border-color: var(--sig-port-err); }
+
+/* ── Bezier wire ─────────────────────────────────────────────── */
+/* Wires are SVG elements placed over the rack canvas.
+   Stroke color should match the shared signal type of the
+   connected ports (use the --sig-* variables above).
+   Stroke width: 2.2px. */
+.wire-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ── Fan item ────────────────────────────────────────────────── */
+.fan-housing {
+  width: 54px;
+  height: 54px;
+  background: #101215;
+  border: 1.8px solid var(--screw-pen);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Fan bore (dark well behind blades) */
+.fan-bore {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #080b0d;
+  border: 1px solid #1a1d22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Fan blade (SVG is the canonical form; CSS approximation) */
+.fan-hub {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #3c3f46;
+  border: 1px solid #1a1d22;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.fan-hub-dot {
+  width: 3.6px;
+  height: 3.6px;
+  border-radius: 50%;
+  background: #14171c;
+}
+
+/* Fan SVG (inline — rotated via JS for animation) */
+.fan-svg { position: absolute; }
+
+/* ── Colour palette swatch grid ─────────────────────────────── */
+.swatch-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 60px;
+}
+
+.swatch-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #33383f;
+  flex-shrink: 0;
+}
+
+.swatch-name {
+  font-size: 7px;
+  color: #606870;
+  text-align: center;
+  word-break: break-all;
+  letter-spacing: 0.2px;
+}
+
+/* ── Rack canvas (demo layout) ───────────────────────────────── */
+.rack-canvas {
+  background: var(--page-bg);
+  border: 1.5px solid #2a2d34;
+  border-radius: 8px;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* ── Typography specimens ─────────────────────────────────────── */
+.type-specimen {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.type-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.type-label {
+  color: #4a5568;
+  font-size: 9px;
+  width: 120px;
+  flex-shrink: 0;
+}
+
+</style>
+</head>
+<body>
+
+<h1 style="font-size:18px; color:#d3d8df; letter-spacing:0.4px; margin-bottom:4px;">
+  MINILOADER — Rack UI Style Reference
+</h1>
+<p style="color:#4a5568; font-size:11px; margin-bottom:4px;">
+  All values sourced directly from <code style="color:#607060;">rack_items.py</code>,
+  <code style="color:#607060;">hypervisor_panel.py</code>,
+  <code style="color:#607060;">fan_item.py</code>,
+  <code style="color:#607060;">wire_renderer.py</code>.
+</p>
+<hr style="border:none; border-top:1px solid #2a2d34; margin: 16px 0;" />
+
+
+<!-- ═══════════════════════════════════════════════════
+     1. HYPERVISOR PANEL
+═══════════════════════════════════════════════════ -->
+<p class="section-header">1 — Hypervisor Panel</p>
+
+<div class="hypervisor-panel">
+  <!-- Top bar: power button, LCD bezel, controls, stats -->
+  <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+
+    <!-- Power button — ON state -->
+    <button class="power-btn on" title="Power ON">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 4.5 A7 7 0 1 0 13 4.5" stroke="#30e848" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1="10" y1="2" x2="10" y2="9" stroke="#30e848" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- LCD bezel -->
+    <div class="lcd-bezel">
+      <div style="font-size:9px; color:#30e84888; letter-spacing:1px;">◆ MINILOADER</div>
+      <div class="hypervisor-title">HYPERVISOR</div>
+    </div>
+
+    <!-- INIT / AUTO buttons -->
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <button class="ctrl-btn init">INIT</button>
+      <button class="ctrl-btn auto-on">AUTO</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" style="margin-top:0;">
+      <div class="stat-block">
+        <div class="stat-label">MODULES</div>
+        <div class="stat-value-bezel"><span class="stat-value">08</span></div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">WIRES</div>
+        <div class="stat-value-bezel"><span class="stat-value">12</span></div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">WORKERS</div>
+        <div class="stat-value-bezel"><span class="stat-value">04</span></div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">STATUS</div>
+        <div class="stat-value-bezel"><span class="stat-value" style="color:var(--status-ready);">READY</span></div>
+      </div>
+    </div>
+
+    <!-- Ventilation slots -->
+    <div class="vent-slots" style="margin-left:auto;">
+      <div class="vent-slot"></div>
+      <div class="vent-slot"></div>
+      <div class="vent-slot"></div>
+      <div class="vent-slot"></div>
+    </div>
+  </div>
+
+  <!-- Module status LEDs -->
+  <div style="margin-top:10px;">
+    <div class="stat-label" style="margin-bottom:6px;">MODULE STATUS</div>
+    <div class="module-leds">
+      <div class="led-block"><div class="led ready"></div>  <span class="led-abbrev">BRAIN</span></div>
+      <div class="led-block"><div class="led running"></div><span class="led-abbrev">GPT</span></div>
+      <div class="led-block"><div class="led loading"></div><span class="led-abbrev">LLM</span></div>
+      <div class="led-block"><div class="led error"></div>  <span class="led-abbrev">RAG</span></div>
+      <div class="led-block"><div class="led stopped"></div><span class="led-abbrev">MCP</span></div>
+      <div class="led-block"><div class="led ready"></div>  <span class="led-abbrev">DB</span></div>
+      <div class="led-block"><div class="led stopped"></div><span class="led-abbrev">FILE</span></div>
+      <div class="led-block"><div class="led running"></div><span class="led-abbrev">NGROK</span></div>
+    </div>
+  </div>
+
+  <!-- Panel tab buttons + log screen -->
+  <div style="margin-top:12px;">
+    <div class="panel-tabs" style="margin-bottom:4px;">
+      <button class="panel-tab active">LOG</button>
+      <button class="panel-tab idle">SYSTEM</button>
+      <button class="panel-tab idle">PROC</button>
+    </div>
+    <div class="log-bezel">
+      <div class="log-screen">
+        <div class="log-line info"  >[INFO]   hypervisor: rack booted — 8 modules registered</div>
+        <div class="log-line worker">[WORKER] llamafile: model loaded in 4.2 s</div>
+        <div class="log-line info"  >[INFO]   gpt_server: listening on 127.0.0.1:8080</div>
+        <div class="log-line warn"  >[WARN]   rag_engine: chroma dir not found — creating</div>
+        <div class="log-line info"  >[INFO]   ngrok_tunnel: tunnel active → https://xxxx.ngrok.io</div>
+        <div class="log-line error" >[ERROR]  mcp_client: connection refused 127.0.0.1:9000</div>
+        <div class="log-line"       >[INFO]   database: schema up to date</div>
+        <div class="log-line worker">[WORKER] basic_brain: processing request id=42</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Power OFF variant (shown inline for reference) -->
+  <div style="margin-top:14px; display:flex; align-items:center; gap:10px;">
+    <div class="stat-label">POWER OFF STATE ↓</div>
+    <button class="power-btn off" title="Power OFF">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 4.5 A7 7 0 1 0 13 4.5" stroke="#ff3333" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1="10" y1="2" x2="10" y2="9" stroke="#ff3333" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="ctrl-btn auto-off">OFF</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     2. SYSTEM MONITOR TAB
+═══════════════════════════════════════════════════ -->
+<p class="section-header">2 — System Monitor Tab</p>
+
+<div class="hypervisor-panel" style="max-width:500px;">
+  <div class="log-bezel">
+    <div class="log-screen sys-monitor">
+      <div class="sys-section-label">SYSTEM MONITOR</div>
+
+      <div class="sys-row">
+        <span class="sys-field">CPU MODEL</span>
+        <span class="sys-val">AMD Ryzen 9 7950X</span>
+      </div>
+      <div class="sys-row">
+        <span class="sys-field">CORES</span>
+        <span class="sys-val">16 / 32T</span>
+      </div>
+      <div class="sys-row" style="align-items:center;">
+        <span class="sys-field">CPU UTIL</span>
+        <span class="sys-val cpu" style="margin-right:8px;">34 %</span>
+        <div class="led-bar">
+          <div class="led-seg on-low"></div><div class="led-seg on-low"></div>
+          <div class="led-seg on-low"></div><div class="led-seg on-low"></div>
+          <div class="led-seg on-low"></div><div class="led-seg on-mid"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+        </div>
+      </div>
+      <div class="sys-row" style="align-items:center;">
+        <span class="sys-field">RAM</span>
+        <span class="sys-val ram" style="margin-right:8px;">18.4 GB</span>
+        <div class="led-bar">
+          <div class="led-seg on-low"></div><div class="led-seg on-low"></div>
+          <div class="led-seg on-low"></div><div class="led-seg on-mid"></div>
+          <div class="led-seg on-mid"></div><div class="led-seg"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+          <div class="led-seg"></div><div class="led-seg"></div>
+        </div>
+      </div>
+      <div class="sys-row">
+        <span class="sys-field">RAM LIMIT</span>
+        <span class="sys-val" style="color:var(--green-mid);">UNLIMITED</span>
+        <div class="ram-slider-track" style="margin-left:8px;">
+          <div class="ram-slider-thumb" style="left:108px;"></div>
+        </div>
+      </div>
+      <div class="sys-row">
+        <span class="sys-field">GPU</span>
+        <span class="sys-val gpu">RTX 4090</span>
+      </div>
+      <div class="sys-row">
+        <span class="sys-field">BACKEND</span>
+        <span>
+          <span class="backend-led cuda-on"></span>
+          <span class="sys-val" style="color:var(--value-green); margin-right:12px;">CUDA</span>
+          <span class="backend-led vulkan-off"></span>
+          <span class="sys-val gpu">VULKAN</span>
+        </span>
+      </div>
+      <div class="sys-row">
+        <span class="sys-field">DISK</span>
+        <span class="sys-val" style="color:var(--label-sys);">C:\  820 GB free</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     3. MODULE CARD + PORT JACKS
+═══════════════════════════════════════════════════ -->
+<p class="section-header">3 — Module Card &amp; Port Jacks</p>
+
+<div style="display:flex; gap:12px; flex-wrap:wrap;">
+
+  <!-- GPT Server card -->
+  <div class="module-card">
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-title">GPT SERVER</div>
+    <div style="padding: 0 14px;">
+      <div style="display:flex; gap:6px; align-items:center; margin-bottom:8px;">
+        <div class="led ready"></div>
+        <span style="font-size:9px; color:#7a818a;">READY</span>
+        <button class="card-btn" style="margin-left:auto;">START</button>
+        <button class="card-btn">STOP</button>
+      </div>
+      <div class="port-row">
+        <div class="port-jack">
+          <div class="jack-ring port-chat"></div>
+          <span class="jack-label">CHAT_IN</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-brain"></div>
+          <span class="jack-label">BRAIN_OUT</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-server-cfg"></div>
+          <span class="jack-label">CFG_IN</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-sys-state"></div>
+          <span class="jack-label">STATE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RAG Engine card -->
+  <div class="module-card">
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-title">RAG ENGINE</div>
+    <div style="padding: 0 14px;">
+      <div style="display:flex; gap:6px; align-items:center; margin-bottom:8px;">
+        <div class="led error"></div>
+        <span style="font-size:9px; color:var(--status-error);">ERROR</span>
+        <button class="card-btn" style="margin-left:auto;">REINIT</button>
+      </div>
+      <div class="port-row">
+        <div class="port-jack">
+          <div class="jack-ring port-query"></div>
+          <span class="jack-label">QUERY_IN</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-context"></div>
+          <span class="jack-label">CTX_OUT</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-files"></div>
+          <span class="jack-label">DOCS_IN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MCP Bus card -->
+  <div class="module-card">
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-title">MCP BUS</div>
+    <div style="padding: 0 14px;">
+      <div style="display:flex; gap:6px; align-items:center; margin-bottom:8px;">
+        <div class="led running"></div>
+        <span style="font-size:9px; color:var(--status-running);">RUNNING</span>
+      </div>
+      <div class="port-row">
+        <div class="port-jack">
+          <div class="jack-ring port-mcp"></div>
+          <span class="jack-label">MCP_IN</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-mcp"></div>
+          <span class="jack-label">MCP_OUT</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-tool-schema"></div>
+          <span class="jack-label">TOOLS</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-tool-exec"></div>
+          <span class="jack-label">EXEC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Database card -->
+  <div class="module-card">
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-title">DATABASE</div>
+    <div style="padding: 0 14px;">
+      <div style="display:flex; gap:6px; align-items:center; margin-bottom:8px;">
+        <div class="led ready"></div>
+        <span style="font-size:9px; color:#7a818a;">READY</span>
+      </div>
+      <div class="port-row">
+        <div class="port-jack">
+          <div class="jack-ring port-db-query"></div>
+          <span class="jack-label">QUERY</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-db-tx"></div>
+          <span class="jack-label">TX</span>
+        </div>
+        <div class="port-jack">
+          <div class="jack-ring port-db-resp"></div>
+          <span class="jack-label">RESP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Wire example (SVG) -->
+<p class="section-header">3b — Bezier Wire (SVG, stroke-width 2.2)</p>
+<div style="background:var(--page-bg); border:1px solid #2a2d34; border-radius:6px; padding:8px; display:inline-block;">
+  <svg width="340" height="90" style="display:block;">
+    <!-- MCP wire: orange #e08b3a -->
+    <path d="M 20 20 C 20 80, 160 80, 160 20" fill="none" stroke="#e08b3a" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- Brain wire: red #d93232 -->
+    <path d="M 60 20 C 60 80, 280 80, 280 20" fill="none" stroke="#d93232" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- Context wire: green #80c65f -->
+    <path d="M 100 20 C 100 70, 220 70, 320 20" fill="none" stroke="#80c65f" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- Chat wire: blue #4e8fe8 -->
+    <path d="M 140 20 C 140 60, 200 60, 200 20" fill="none" stroke="#4e8fe8" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     4. FAN ITEM (SVG)
+═══════════════════════════════════════════════════ -->
+<p class="section-header">4 — Fan Item (SVG, animated)</p>
+
+<div style="display:flex; gap:16px; align-items:center;">
+  <!-- Fan rendered as inline SVG for full fidelity -->
+  <svg id="fan-svg" width="54" height="54" viewBox="-27 -27 54 54" style="display:block;">
+    <!-- Housing frame -->
+    <rect x="-26" y="-26" width="52" height="52" rx="4" ry="4"
+          fill="#101215" stroke="#2a2d32" stroke-width="1.8"/>
+    <!-- Bore -->
+    <circle cx="0" cy="0" r="24" fill="#080b0d" stroke="#1a1d22" stroke-width="1"/>
+    <!-- Grill rings -->
+    <circle cx="0" cy="0" r="10.35" fill="none" stroke="#3a3e45" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="16.56" fill="none" stroke="#3a3e45" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="21.85" fill="none" stroke="#3a3e45" stroke-width="1.4" stroke-linecap="round"/>
+    <!-- Grill spokes (8) -->
+    <g stroke="#3a3e45" stroke-width="1.4" stroke-linecap="round">
+      <line x1="0" y1="8"    x2="0"     y2="21.85"/>
+      <line x1="0" y1="-8"   x2="0"     y2="-21.85"/>
+      <line x1="8" y1="0"    x2="21.85" y2="0"/>
+      <line x1="-8" y1="0"   x2="-21.85" y2="0"/>
+      <line x1="5.66" y1="5.66"   x2="15.45" y2="15.45"/>
+      <line x1="-5.66" y1="5.66"  x2="-15.45" y2="15.45"/>
+      <line x1="5.66" y1="-5.66"  x2="15.45" y2="-15.45"/>
+      <line x1="-5.66" y1="-5.66" x2="-15.45" y2="-15.45"/>
+    </g>
+    <!-- Blade group (animated via JS) -->
+    <g id="fan-blades">
+      <path d="M 0,-5.2 Q 15.64,-9.5 21.5,-11
+               L 21,-0.2 Q 12.65,3 0,-4.55 Z"
+            fill="#1e3a2c" stroke="#1a5035" stroke-width="0.5"
+            transform="rotate(0)"/>
+      <path d="M 0,-5.2 Q 15.64,-9.5 21.5,-11
+               L 21,-0.2 Q 12.65,3 0,-4.55 Z"
+            fill="#1e3a2c" stroke="#1a5035" stroke-width="0.5"
+            transform="rotate(51.4)"/>
+      <path d="M 0,-5.2 Q 15.64,-9.5 21.5,-11
+               L 21,-0.2 Q 12.65,3 0,-4.55 Z"
+            fill="#1e3a2c" stroke="#1a5035" stroke-width="0.5"
+            transform="rotate(102.9)"/>
+      <path d="M 0,-5.2 Q 15.64,-9.5 21.5,-11
+               L 21,-0.2 Q 12.65,3 0,-4.55 Z"
+            fill="#1e3a2c" stroke="#1a5035" stroke-width="0.5"
+            transform="rotate(154.3)"/>
+      <path d="M 0,-5.2 Q 15.64,-9.5 21.5,-11
+               L 21,-0.2 Q 12.65,3 0,-4.55 Z"
+            fill="#1e3a2c" stroke="#1a5035" stroke-width="0.5"
+            transform="rotate(205.7)"/>
+      <path d="M 0,-5.2 Q 15.64,-9.5 21.5,-11
+               L 21,-0.2 Q 12.65,3 0,-4.55 Z"
+            fill="#1e3a2c" stroke="#1a5035" stroke-width="0.5"
+            transform="rotate(257.1)"/>
+      <path d="M 0,-5.2 Q 15.64,-9.5 21.5,-11
+               L 21,-0.2 Q 12.65,3 0,-4.55 Z"
+            fill="#1e3a2c" stroke="#1a5035" stroke-width="0.5"
+            transform="rotate(308.6)"/>
+    </g>
+    <!-- Hub cap -->
+    <circle cx="0" cy="0" r="6.5" fill="#3c3f46" stroke="#1a1d22" stroke-width="1"/>
+    <!-- Hub center dot -->
+    <circle cx="0" cy="0" r="1.8" fill="#14171c"/>
+    <!-- Corner screws -->
+    <circle cx="-22" cy="-22" r="2.8" fill="#3a3d42" stroke="#2a2d32" stroke-width="0.8"/>
+    <rect   x="-24.2" y="-22.5" width="4.4" height="1" fill="#22242a"/>
+    <circle cx="22" cy="-22" r="2.8" fill="#3a3d42" stroke="#2a2d32" stroke-width="0.8"/>
+    <rect   x="19.8" y="-22.5" width="4.4" height="1" fill="#22242a"/>
+    <circle cx="-22" cy="22" r="2.8" fill="#3a3d42" stroke="#2a2d32" stroke-width="0.8"/>
+    <rect   x="-24.2" y="21.5" width="4.4" height="1" fill="#22242a"/>
+    <circle cx="22" cy="22" r="2.8" fill="#3a3d42" stroke="#2a2d32" stroke-width="0.8"/>
+    <rect   x="19.8" y="21.5" width="4.4" height="1" fill="#22242a"/>
+  </svg>
+
+  <div style="font-size:9px; color:#607060; line-height:1.8;">
+    <div>Housing: <span style="color:#3a3d42">█</span> #101215, border #2a2d32 @ 1.8px</div>
+    <div>Bore: <span style="color:#080b0d">█</span> #080b0d, ring #1a1d22 @ 1px</div>
+    <div>Blades: <span style="color:#1e3a2c">█</span> #1e3a2c, stroke #1a5035 @ 0.5px</div>
+    <div>Hub: <span style="color:#3c3f46">█</span> #3c3f46 · Dot: #14171c</div>
+    <div>Grill: stroke #3a3e45 @ 1.4px RoundCap</div>
+    <div>Animation: +2° per frame (60 fps → ~120 RPM)</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     5. COLOUR PALETTE
+═══════════════════════════════════════════════════ -->
+<p class="section-header">5 — Signal / Port Colour Palette</p>
+
+<div class="swatch-grid">
+  <div class="swatch"><div class="swatch-dot" style="background:#43b4e5"></div><span class="swatch-name">LOCAL_IP<br>#43b4e5</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#d93232"></div><span class="swatch-name">BRAIN<br>#d93232</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#e08b3a"></div><span class="swatch-name">MCP / TOOLS<br>#e08b3a</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#5a66c8"></div><span class="swatch-name">WEB / ROUTING<br>#5a66c8</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#2d93a2"></div><span class="swatch-name">DB / DB_QUERY<br>#2d93a2</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#d4932c"></div><span class="swatch-name">FILES<br>#d4932c</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#80c65f"></div><span class="swatch-name">CONTEXT<br>#80c65f</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#d1c748"></div><span class="swatch-name">QUERY<br>#d1c748</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#4e8fe8"></div><span class="swatch-name">CHAT<br>#4e8fe8</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#8a57e8"></div><span class="swatch-name">SERVER_CFG<br>#8a57e8</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#d46535"></div><span class="swatch-name">TOOL_EXEC<br>#d46535</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#206f7b"></div><span class="swatch-name">DB_TX<br>#206f7b</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#3ea874"></div><span class="swatch-name">DB_RESP<br>#3ea874</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#838383"></div><span class="swatch-name">TUNNEL<br>#838383</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#f3a95f"></div><span class="swatch-name">MODEL_LOAD<br>#f3a95f</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#66c6ff"></div><span class="swatch-name">SYS_STATE<br>#66c6ff</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#c94848"></div><span class="swatch-name">PORT_ERR<br>#c94848</span></div>
+</div>
+
+<p class="section-header" style="margin-top:24px;">5b — Status &amp; Log Colours</p>
+<div class="swatch-grid">
+  <div class="swatch"><div class="swatch-dot" style="background:#39d353"></div><span class="swatch-name">READY<br>#39d353</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#d68c1a"></div><span class="swatch-name">RUNNING<br>#d68c1a</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#d6b745"></div><span class="swatch-name">LOADING<br>#d6b745</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#e24c4c"></div><span class="swatch-name">ERROR<br>#e24c4c</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#6f6f6f"></div><span class="swatch-name">STOPPED<br>#6f6f6f</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#30c040"></div><span class="swatch-name">LOG INFO<br>#30c040</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#d4a020"></div><span class="swatch-name">LOG WARN<br>#d4a020</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#e04040"></div><span class="swatch-name">LOG ERROR<br>#e04040</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#40c8e0"></div><span class="swatch-name">LOG WORKER<br>#40c8e0</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#607060"></div><span class="swatch-name">LOG DIM<br>#607060</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     6. TYPOGRAPHY SPECIMENS
+═══════════════════════════════════════════════════ -->
+<p class="section-header">6 — Typography (Consolas / Monospace)</p>
+
+<div class="type-specimen">
+  <div class="type-row">
+    <span class="type-label">Consolas 13 ExtraBold</span>
+    <span style="font-family:var(--font-mono); font-size:13px; font-weight:800; color:#30e848; text-shadow:0 0 14px #30e848;">HYPERVISOR</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">Consolas 13 Bold</span>
+    <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#d3d8df;">MODULE TITLE</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">Consolas 9 (MONO_FONT)</span>
+    <span style="font-family:var(--font-mono); font-size:9px; color:#30c040;">[INFO]  gpt_server: ready on 127.0.0.1:8080</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">Consolas 8 (LCD_FONT)</span>
+    <span style="font-family:var(--font-mono); font-size:8px; color:#808890;">MODULES   WIRES   WORKERS   STATUS</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">Consolas 7 Bold</span>
+    <span style="font-family:var(--font-mono); font-size:7px; font-weight:700; color:#6090c0;">INIT</span>
+    <span style="font-family:var(--font-mono); font-size:7px; font-weight:700; color:#b6d9b6; margin-left:16px;">AUTO</span>
+    <span style="font-family:var(--font-mono); font-size:7px; font-weight:700; color:#30b848; margin-left:16px;">LOG</span>
+  </div>
+  <div class="type-row">
+    <span class="type-label">Consolas 6</span>
+    <span style="font-family:var(--font-mono); font-size:6px; color:#606870;">BRAIN  GPT  LLM  RAG  MCP  DB  FILE  NGROK</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     7. GRADIENT REFERENCE
+═══════════════════════════════════════════════════ -->
+<p class="section-header">7 — Gradient Reference</p>
+
+<div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:4px;">
+  <div style="display:flex; flex-direction:column; gap:4px; align-items:center;">
+    <div style="width:80px; height:60px; background:linear-gradient(to bottom, #2a2d34 0%, #1e2028 15%, #191b20 100%); border-radius:4px;"></div>
+    <span style="font-size:8px; color:#606870; text-align:center;">Hypervisor Panel</span>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:4px; align-items:center;">
+    <div style="width:80px; height:60px; background:linear-gradient(to bottom, #252830 0%, #1c1e24 100%); border-radius:4px;"></div>
+    <span style="font-size:8px; color:#606870; text-align:center;">Module Card</span>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:4px; align-items:center;">
+    <div style="width:80px; height:60px; background:linear-gradient(to bottom, #0a100a 0%, #0d150d 15%, #0a120a 85%, #070c07 100%); border-radius:4px;"></div>
+    <span style="font-size:8px; color:#606870; text-align:center;">LCD Bezel</span>
+  </div>
+</div>
+
+
+<hr style="border:none; border-top:1px solid #2a2d34; margin: 28px 0 16px;" />
+<p style="font-size:9px; color:#3a3d42; font-family:var(--font-mono);">
+  styles/rack-ui.html — auto-generated reference · Miniloader Rack UI © MiniLoader Team
+</p>
+
+
+<!-- Fan animation -->
+<script>
+  (function () {
+    const blades = document.getElementById("fan-blades");
+    let angle = 0;
+    function step() {
+      angle = (angle + 2) % 360;
+      blades.setAttribute("transform", `rotate(${angle})`);
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+</script>
+
+</body>
+</html>
